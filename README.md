@@ -1,4 +1,4 @@
-# PBM Landing Page Boilerplate
+# lp-laundry
 
 Fondasi Laravel + Inertia + React untuk project landing page PBM Agency. Satu repository mendukung mode CTWA dan FORM, dashboard Analytics, A/B Labs, Meta Pixel + CAPI, GTM/GA4/Clarity, serta Duitku opsional.
 

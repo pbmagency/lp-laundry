@@ -11,16 +11,21 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    $mode = (string) config('analytics.mode');
     $number = preg_replace('/\D+/', '', (string) config('analytics.whatsapp_number'));
-    $whatsappUrl = $number ? 'https://wa.me/'.$number.'?text='.urlencode((string) config('analytics.whatsapp_default_message')) : '#pricing';
+    $whatsappUrl = strlen($number) >= 9
+        ? 'https://wa.me/'.$number.'?text='.urlencode((string) config('analytics.whatsapp_default_message'))
+        : null;
+    $productPrice = (int) config('analytics.product_price');
+    $productOriginalPrice = (int) config('analytics.product_original_price');
 
-    return Inertia::render("demo/{$mode}", [
+    return Inertia::render('index', [
         'whatsappUrl' => $whatsappUrl,
-        'externalCheckoutUrl' => config('analytics.external_checkout_url'),
         'paymentMode' => config('analytics.payment_mode'),
-        'productName' => config('analytics.product_name'),
-        'productPrice' => config('analytics.product_price'),
+        'productName' => filled(config('analytics.product_name')) ? config('analytics.product_name') : 'Webinar Laundry Mastery',
+        'productPrice' => $productPrice > 0 ? $productPrice : 35000,
+        'productOriginalPrice' => $productOriginalPrice > 0 ? $productOriginalPrice : 120000,
+        'webinarStartsAt' => config('analytics.webinar_starts_at'),
+        'promoEndsAt' => config('analytics.promo_ends_at'),
     ]);
 })->name('home');
 
@@ -29,14 +34,12 @@ Route::middleware('throttle:120,1')->group(function () {
     Route::post('/analytics/heartbeat', HeartbeatController::class)->name('analytics.heartbeat');
 });
 
-if (config('analytics.mode') === 'form') {
-    Route::post('/lead', [LeadController::class, 'store'])->middleware('throttle:20,1')->name('lead.store');
-    Route::post('/checkout', [CheckoutController::class, 'store'])->middleware('throttle:20,1')->name('checkout.store');
-    Route::get('/payment/return', [CheckoutController::class, 'returnPage'])->name('payment.return');
-    Route::post('/payment/callback', [PaymentCallbackController::class, 'handle'])->name('payment.callback');
-    $thankYouPath = '/'.ltrim((string) config('analytics.thank_you_path'), '/');
-    Route::inertia($thankYouPath, 'demo/thank-you')->name('thank-you');
-}
+Route::post('/lead', [LeadController::class, 'store'])->middleware('throttle:20,1')->name('lead.store');
+Route::post('/checkout', [CheckoutController::class, 'store'])->middleware('throttle:20,1')->name('checkout.store');
+Route::get('/payment/return', [CheckoutController::class, 'returnPage'])->name('payment.return');
+Route::post('/payment/callback', [PaymentCallbackController::class, 'handle'])->name('payment.callback');
+$thankYouPath = '/'.ltrim((string) config('analytics.thank_you_path'), '/');
+Route::inertia($thankYouPath, 'demo/thank-you')->name('thank-you');
 
 Route::middleware('auth')->group(function () {
     Route::redirect('dashboard', '/admin')->name('dashboard');
