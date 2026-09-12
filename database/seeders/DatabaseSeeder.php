@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Admin dibuat secara eksplisit lewat `php artisan pbm:create-admin`.
+        $this->call(AdminUserSeeder::class);
         $this->call(AnalyticsDemoSeeder::class);
     }
 }
