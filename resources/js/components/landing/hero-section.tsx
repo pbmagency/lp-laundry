@@ -171,7 +171,7 @@ export function HeroSection({
                         height={488}
                         loading="eager"
                         decoding="async"
-                        className="absolute right-[clamp(16px,5vw,96px)] bottom-0 h-auto max-h-[96%] w-[clamp(400px,40vw,430px)] object-contain object-bottom drop-shadow-[0_22px_38px_rgba(92,20,22,0.26)] max-lg:right-1/2 max-lg:max-h-full max-lg:w-[clamp(230px,46vw,430px)] max-lg:translate-x-1/2"
+                        className="hero-portrait-image absolute right-[clamp(16px,5vw,96px)] bottom-0 h-auto max-h-[96%] w-[clamp(400px,40vw,430px)] object-contain object-bottom drop-shadow-[0_22px_38px_rgba(92,20,22,0.26)] max-lg:right-1/2 max-lg:max-h-full max-lg:w-[clamp(230px,46vw,430px)] max-lg:translate-x-1/2"
                         style={{
                             WebkitMaskImage: portraitMask,
                             maskImage: portraitMask,
@@ -192,13 +192,13 @@ export function HeroSection({
                 </div>
             </div>
             <div
-                className="pointer-events-none absolute right-0 bottom-0 left-0 h-[180px]"
+                className="pointer-events-none absolute right-0 bottom-0 left-0 h-[180px] max-md:hidden"
                 style={{
                     background:
                         'linear-gradient(0deg,#FDEBEA 30%,rgba(253,235,234,0) 100%)',
                 }}
             />
-            <div className="absolute right-[-8%] -bottom-[90px] left-[-8%] h-[180px] rounded-[50%] bg-white" />
+            <div className="absolute right-[-8%] -bottom-[90px] left-[-8%] h-[180px] rounded-[50%] bg-white max-md:hidden" />
         </section>
     );
 }
