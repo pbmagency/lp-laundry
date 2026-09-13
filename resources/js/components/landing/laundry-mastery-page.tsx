@@ -1,4 +1,5 @@
 import { Head } from '@inertiajs/react';
+import { useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 import { FaqSection } from '@/components/landing/faq-section';
 import { HeroSection } from '@/components/landing/hero-section';
@@ -164,21 +165,86 @@ const mentorPoints: { icon: Icon; label: string }[] = [
     { icon: iconCalc, label: 'Mengatur keuangan bisnis' },
 ];
 
-const testimonials: { quote: string; person: string; full?: boolean }[] = [
+const testimonials: {
+    quote: string;
+    person: string;
+    video: string;
+    videoCaption: string;
+    full?: boolean;
+}[] = [
     {
         quote: '“Sekarang kami lebih fokus dan tidak takut menghadapi perang harga.”',
         person: '— Wulan, Klinik Reparasi, Pati, Jawa Tengah',
+        video: 'https://laundrymastery.id/Wulan%2C%20Klinik%20Reparasi%2C%20Pati%2C%20Jawa%20Tengah.mp4',
+        videoCaption: 'Putar kisah Wulan',
     },
     {
         quote: '“Business Model Canvas sangat menginspirasi untuk mengembangkan usaha laundry.”',
         person: '— Muhammad Kirsyam, Owner A3 Laundry, Pekalongan',
+        video: 'https://laundrymastery.id/Muhammad%20Kirsyam%2C%20Owner%20A3%20Laundry%2C%20Pekalongan.mp4',
+        videoCaption: 'Putar kisah Muhammad Kirsyam',
     },
     {
         quote: '“Kami jadi lebih paham pentingnya identitas dan positioning bisnis laundry.”',
         person: '— Bang Bambang, DPD ILI Jawa Tengah',
+        video: 'https://laundrymastery.id/Bang%20Bambang%2C%20DPD%20ILI%20Jawa%20Tengah.mp4',
+        videoCaption: 'Putar kisah Bang Bambang',
         full: true,
     },
 ];
+
+function TestimonialVideo({ src, caption }: { src: string; caption: string }) {
+    const videoRef = useRef<HTMLVideoElement>(null);
+    const [hasStarted, setHasStarted] = useState(false);
+
+    const playVideo = () => {
+        void videoRef.current?.play();
+    };
+
+    return (
+        <div className="relative aspect-video overflow-hidden rounded-[6px] bg-[#0B0B0B]">
+            <video
+                ref={videoRef}
+                className="h-full w-full object-cover"
+                controls
+                playsInline
+                preload="metadata"
+                onPlay={() => setHasStarted(true)}
+                onEnded={() => setHasStarted(false)}
+            >
+                <source src={src} type="video/mp4" />
+                Browser Anda tidak mendukung pemutaran video.
+            </video>
+
+            {!hasStarted && (
+                <button
+                    type="button"
+                    onClick={playVideo}
+                    aria-label={caption}
+                    className="group absolute inset-0 flex cursor-pointer flex-col items-center justify-center gap-[10px] bg-black/25 text-white transition-colors hover:bg-black/35 focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-white"
+                >
+                    <span className="flex h-[58px] w-[58px] items-center justify-center rounded-full bg-[#C62C36] shadow-[0_10px_28px_rgba(198,44,54,0.48)] transition-transform group-hover:scale-105">
+                        <svg
+                            width="20"
+                            height="22"
+                            viewBox="0 0 20 22"
+                            fill="none"
+                            aria-hidden="true"
+                        >
+                            <path
+                                d="M19 11 1 21V1l18 10Z"
+                                fill="currentColor"
+                            />
+                        </svg>
+                    </span>
+                    <span className="rounded-full bg-black/55 px-[12px] py-[5px] text-[12px] font-bold tracking-[0.01em] shadow-sm backdrop-blur-[2px]">
+                        {caption}
+                    </span>
+                </button>
+            )}
+        </div>
+    );
+}
 
 const includes: string[] = [
     '6 Modul Strategi Laundry',
@@ -413,11 +479,10 @@ export default function LaundryMasteryPage({
                                             : undefined
                                     }
                                 >
-                                    <div className="relative flex aspect-video items-center justify-center rounded-[6px] bg-[#0B0B0B]">
-                                        <span className="flex h-[46px] w-[46px] items-center justify-center rounded-full border-2 border-white/90 pl-[3px] text-[15px] text-white">
-                                            ▶
-                                        </span>
-                                    </div>
+                                    <TestimonialVideo
+                                        src={t.video}
+                                        caption={t.videoCaption}
+                                    />
                                     <div className="relative mx-[14px] -mt-[14px] rounded-[12px] border border-[#5C1416] bg-[#F6DFB4] px-[20px] py-[18px] text-center">
                                         <p className="text-[13px] leading-[1.55] font-bold text-[#5C1416]">
                                             {t.quote}
