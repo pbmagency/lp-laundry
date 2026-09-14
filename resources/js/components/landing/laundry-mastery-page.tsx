@@ -175,19 +175,19 @@ const testimonials: {
     {
         quote: '“Sekarang kami lebih fokus dan tidak takut menghadapi perang harga.”',
         person: '— Wulan, Klinik Reparasi, Pati, Jawa Tengah',
-        video: 'https://laundrymastery.id/Wulan%2C%20Klinik%20Reparasi%2C%20Pati%2C%20Jawa%20Tengah.mp4',
+        video: 'https://Laundry.b-cdn.net/Wulan%2C%20Klinik%20Reparasi%2C%20Pati%2C%20Jawa%20Tengah.mp4',
         videoCaption: 'Putar kisah Wulan',
     },
     {
         quote: '“Business Model Canvas sangat menginspirasi untuk mengembangkan usaha laundry.”',
         person: '— Muhammad Kirsyam, Owner A3 Laundry, Pekalongan',
-        video: 'https://laundrymastery.id/Muhammad%20Kirsyam%2C%20Owner%20A3%20Laundry%2C%20Pekalongan.mp4',
+        video: 'https://Laundry.b-cdn.net/Muhammad%20Kirsyam%2C%20Owner%20A3%20Laundry%2C%20Pekalongan.mp4',
         videoCaption: 'Putar kisah Muhammad Kirsyam',
     },
     {
         quote: '“Kami jadi lebih paham pentingnya identitas dan positioning bisnis laundry.”',
         person: '— Bang Bambang, DPD ILI Jawa Tengah',
-        video: 'https://laundrymastery.id/Bang%20Bambang%2C%20DPD%20ILI%20Jawa%20Tengah.mp4',
+        video: 'https://Laundry.b-cdn.net/Bang%20Bambang%2C%20DPD%20ILI%20Jawa%20Tengah.mp4',
         videoCaption: 'Putar kisah Bang Bambang',
         full: true,
     },
