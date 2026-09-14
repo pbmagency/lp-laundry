@@ -48,16 +48,18 @@ export function HeroSection({
     return (
         <section id="hero" className="relative overflow-hidden bg-[#FDEBEA]">
             <div className="flex flex-wrap items-stretch">
-                <div className="relative z-[3] ml-auto w-full max-w-[680px] min-w-0 flex-[1_1_420px] px-[clamp(18px,3vw,28px)] pt-[clamp(28px,4vw,44px)] pb-[clamp(56px,7vw,88px)]">
+                <div className="relative z-[3] ml-auto w-full max-w-[680px] min-w-0 flex-[1_1_420px] px-[clamp(14px,4.2vw,18px)] pt-[clamp(28px,4vw,44px)] pb-[clamp(56px,7vw,88px)] max-[390px]:px-[14px] md:px-[clamp(18px,3vw,28px)]">
                     <div className="inline-flex items-center gap-[9px] rounded-full border border-[#F3C9C7] bg-white px-[16px] py-[8px]">
                         <span className="block h-[8px] w-[8px] flex-none rounded-full bg-[#C62C36]" />
                         <span className="text-[11px] font-bold tracking-[0.08em] text-[#8A1015]">
                             LIVE WEBINAR VIA ZOOM
                         </span>
                     </div>
-                    <h1 className="mt-[18px] text-[clamp(29px,4.4vw,44px)] leading-[1.15] font-extrabold tracking-[-0.02em] text-balance text-[#16181A]">
-                        Bangun Usaha Laundry untuk
-                        <span className="block text-[#C62C36]">
+                    <h1 className="mt-[18px] text-[clamp(22px,6.75vw,29px)] leading-[1.15] font-extrabold tracking-[-0.02em] text-balance text-[#16181A] max-[390px]:text-[clamp(22px,6.65vw,26px)] md:text-[clamp(29px,4.4vw,44px)]">
+                        <span className="max-md:block max-md:whitespace-nowrap">
+                            Bangun Usaha Laundry untuk
+                        </span>
+                        <span className="block text-[#C62C36] max-md:whitespace-nowrap">
                             Penghasilan di Masa Pensiun.
                         </span>
                     </h1>
@@ -70,7 +72,7 @@ export function HeroSection({
                         {webinarSchedule}
                     </p>
 
-                    <div className="mt-[20px] flex flex-wrap gap-x-[22px] gap-y-[12px]">
+                    <div className="mt-[20px] grid grid-cols-2 gap-x-[clamp(12px,5.1vw,22px)] gap-y-[12px] md:flex md:flex-wrap md:gap-x-[22px]">
                         {[
                             {
                                 icon: (
